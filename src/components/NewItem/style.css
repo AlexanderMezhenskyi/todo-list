@@ -1,0 +1,17 @@
+.new-item {
+    margin-top: 10px;
+    display: flex;
+}
+.new-item input {
+    margin-right: 10px;
+    flex-grow: 1;
+    width: auto;
+}
+
+.new-item .form-check {
+    padding-top: 7px;
+}
+
+.new-item input[type="checkbox"] {
+    margin-top: 7px;
+}
