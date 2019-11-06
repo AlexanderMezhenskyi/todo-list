@@ -2,7 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://AlexanderMezhenskyi.github.io/todo-list",
+  "homepage": "https://AlexanderMezhenskyi.github.io/todo-list",
   "dependencies": {
     "gh-pages": "^2.1.1",
     "react": "^16.9.0",
@@ -31,5 +31,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-dev-utils": "^9.0.3"
   }
 }

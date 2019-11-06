@@ -69,10 +69,19 @@ export default class App extends Component {
         });
     };
 
-    search = (e) => {
-        this.setState({
-            term: e.target.value
-        });
+    searchChange = (e) => {
+        this.setState({term: e.target.value});
+    };
+
+    search = () => {
+        const items = this.state.todoData;
+
+        if (this.state.term === '') {
+            return items;
+        }
+
+        return items.filter(el => el.itemTitle.toLowerCase()
+                    .indexOf(this.state.term.toLowerCase()) > -1);
     };
 
     toggleItemsStatus = (status) => {
@@ -81,20 +90,42 @@ export default class App extends Component {
         });
     };
 
+    filter = itemAfterSearch => {
+        const {statusFilter} = this.state;
+
+        if (statusFilter === 'all') {
+            return itemAfterSearch;
+        }
+
+        let filteredItems = itemAfterSearch.filter(el => {
+             if (statusFilter === 'done') {
+                return el.done;
+             } else if (statusFilter === 'important') {
+                return el.important;
+             } else if (statusFilter === 'favorite') {
+                 return el.favorite;
+             } else {
+                 return !el.done;
+             }
+        });
+
+        return filteredItems;
+    };
+
     render() {
         let {todoData, term, statusFilter} = this.state,
+            searchResult = this.filter(this.search()),
             done = todoData.filter(el => el.done).length,
             todo = todoData.length - done;
 
         return (
             <div className="p-5">
                 <AppHeader todo={todo} done={done}/>
-                <TopPanel onSearch={this.search}
+                <TopPanel onSearch={this.searchChange}
                           term={term}
                           statusFilter={statusFilter}
                           onToggleItemsStatus={this.toggleItemsStatus}/>
-                <TodoList todoData={todoData}
-                          statusFilter={statusFilter}
+                <TodoList todoData={searchResult}
                           onDeleteItem={this.deleteItem}
                           onToggleProperty={this.toggleProperty}/>
                 <NewItem onAddItem={this.addItem}/>

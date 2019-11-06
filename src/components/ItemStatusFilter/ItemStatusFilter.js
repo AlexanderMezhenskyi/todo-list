@@ -1,23 +1,34 @@
 import React from 'react';
+import ItemsStatusExtraFilter from '../ItemsStatusExtraFilter/ItemsStatusExtraFilter'
 import './style.css';
 
 const ItemStatusFilter = ({onToggleItemsStatus, statusFilter}) => {
-    let itemClasses = 'btn btn-outline-secondary';
+    const filters = [
+        {code: 'all', label: 'All'},
+        {code: 'active', label: 'Active'},
+        {code: 'done', label: 'Done'},
+        {code: 'important', label: 'Important'},
+        {code: 'favorite', label: 'Favorite'}
+    ];
 
     return (
-        <div className="btn-group">
-            <button type="button"
-                    className={(statusFilter === 'all') ? itemClasses + ' active' : itemClasses}
-                    onClick={() => {onToggleItemsStatus('all')}}>All
-            </button>
-            <button type="button"
-                    className={(statusFilter === 'active') ? itemClasses + ' active' : itemClasses}
-                    onClick={() => {onToggleItemsStatus('active')}}>Active
-            </button>
-            <button type="button"
-                    className={(statusFilter === 'done') ? itemClasses + ' active' : itemClasses}
-                    onClick={() => {onToggleItemsStatus('done')}}>Done
-            </button>
+        <div>
+            <div className="btn-group">
+                {filters.map((el) => {
+                    const cls = el.code === statusFilter ? 'btn-info' : 'btn-outline-secondary';
+
+                    return (
+                        <button key={el.code}
+                                type="button"
+                                onClick={() => {onToggleItemsStatus(el.code)}}
+                                className={`btn ${cls}`}
+                        >
+                            {el.label}
+                        </button>
+                    )
+                })}
+            </div>
+            <ItemsStatusExtraFilter statusFilter={statusFilter}/>
         </div>
     )
 };
