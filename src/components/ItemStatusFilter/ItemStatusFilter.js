@@ -1,5 +1,4 @@
 import React from 'react';
-import ItemsStatusExtraFilter from '../ItemsStatusExtraFilter/ItemsStatusExtraFilter'
 import './style.css';
 
 const ItemStatusFilter = ({onToggleItemsStatus, statusFilter}) => {
@@ -28,7 +27,6 @@ const ItemStatusFilter = ({onToggleItemsStatus, statusFilter}) => {
                     )
                 })}
             </div>
-            <ItemsStatusExtraFilter statusFilter={statusFilter}/>
         </div>
     )
 };
